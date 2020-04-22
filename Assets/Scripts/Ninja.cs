@@ -152,7 +152,7 @@ public class Ninja : MonoBehaviour
                 else if (touch.phase == TouchPhase.Moved)
                 {
                     touchEnd = touch.position.y;
-                    if (Mathf.Abs(touchStart - touchEnd) >= 50)
+                    if (Mathf.Abs(touchStart - touchEnd) >= 10)
                     {
                         if (touchStart > touchEnd)
                         {
@@ -179,7 +179,7 @@ public class Ninja : MonoBehaviour
                 else if (touch.phase == TouchPhase.Ended)
                 {
                     touchEnd = touch.position.y;
-                    if (Mathf.Abs(touchStart - touchEnd) >= 50)
+                    if (Mathf.Abs(touchStart - touchEnd) >= 10)
                     {
                         if (touchStart > touchEnd)
                         {

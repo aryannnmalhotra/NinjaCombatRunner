@@ -435,7 +435,7 @@ Transform:
   m_GameObject: {fileID: 446729674}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 2.73, z: 0}
-  m_LocalScale: {x: 1.635, y: 1.2, z: 0}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -684,7 +684,7 @@ Transform:
   m_GameObject: {fileID: 643472280}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 2.73, z: 0}
-  m_LocalScale: {x: 1.6350007, y: 1.2000005, z: 0}
+  m_LocalScale: {x: 1.2, y: 1.2000005, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -1687,7 +1687,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Star: {fileID: 7839280999780240794, guid: 9b2801ae6870f2f4cb23902c946aeb11, type: 3}
   Kunai: {fileID: 838489302796679869, guid: 9a9bb4c6afcaec641921d5558de2a921, type: 3}
-  Force: 3
+  Force: 2.9
   Ninjaa: {fileID: 2089754188}
   UI: {fileID: 519420033}
   StarSound: {fileID: 8300000, guid: f217243fe5294234b9fb30403fb7f933, type: 3}
