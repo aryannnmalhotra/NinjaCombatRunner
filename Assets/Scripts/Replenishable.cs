@@ -18,6 +18,7 @@ public class Replenishable : MonoBehaviour
             {
                 int toAdd = Random.Range(25,61);
                 Ninja.Health = Mathf.Clamp(Ninja.Health + toAdd, 0, 100);
+                Ninja.HealthLastChecked = Ninja.Health;
                 for(int i = 0; i < ReplenishableSpawn.replenishables.Count; i++)
                 {
                     if (ReplenishableSpawn.replenishables[i] == this.gameObject)

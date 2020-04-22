@@ -59,11 +59,14 @@ public class ReplenishableSpawn : MonoBehaviour
         {
             for (int i = 0; i < replenishables.Count; i++)
             {
-                if (NinjaPos.position.x - replenishables[i].transform.position.x > 3.5f)
+                if (replenishables[i] != null)
                 {
-                    var toDestroy = replenishables[i];
-                    replenishables.RemoveAt(i);
-                    Destroy(toDestroy);
+                    if (NinjaPos.position.x - replenishables[i].transform.position.x > 3.5f)
+                    {
+                        var toDestroy = replenishables[i];
+                        replenishables.RemoveAt(i);
+                        Destroy(toDestroy);
+                    }
                 }
             }
         }

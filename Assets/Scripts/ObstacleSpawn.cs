@@ -54,11 +54,14 @@ public class ObstacleSpawn : MonoBehaviour
         {
             for (int i = 0; i < obstacles.Count; i++)
             {
-                if (NinjaPos.position.x - obstacles[i].transform.position.x > 3.3f)
+                if (obstacles[i] != null)
                 {
-                    var toDestroy = obstacles[i];
-                    obstacles.RemoveAt(i);
-                    Destroy(toDestroy);
+                    if (NinjaPos.position.x - obstacles[i].transform.position.x > 3.3f)
+                    {
+                        var toDestroy = obstacles[i];
+                        obstacles.RemoveAt(i);
+                        Destroy(toDestroy);
+                    }
                 }
             }
         }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MainMenuUI : MonoBehaviour
 {
+    private AudioSource soundPlayer;
     public GameObject Bg;
     public GameObject Panel;
     public GameObject User1;
@@ -12,9 +13,11 @@ public class MainMenuUI : MonoBehaviour
     public GameObject User4;
     public GameObject User5;
     public GameObject User6;
+    public AudioClip ButtonSound;
     void Start()
     {
-
+        soundPlayer = GetComponent<AudioSource>();
+        soundPlayer.PlayOneShot(ButtonSound);
     }
     public void Next()
     {

@@ -7,17 +7,21 @@ public class Enemy : MonoBehaviour
     private bool isAlive;
     private float Health;
     private Animator anim;
+    private AudioSource soundPlayer;
     private GameObject NinjaP;
     private GameObject hB;
     public bool isAlpha;
     public GameObject Bullet;
     public GameObject Rocket;
     public GameObject HB;
+    public AudioClip RpgSound;
+    public AudioClip BulletSound;
     private void Awake()
     {
         isAlive = true;
         Health = 100;
         anim = GetComponent<Animator>();
+        soundPlayer = GetComponent<AudioSource>();
         NinjaP = GameObject.FindWithTag("Player");
     }
     void HealthBar()
@@ -69,6 +73,7 @@ public class Enemy : MonoBehaviour
                         Invoke("ShootReset", 0.4f);
                         var go = Instantiate(Rocket) as GameObject;
                         go.transform.position = new Vector3(this.gameObject.transform.position.x - 3, -2.99f,0);
+                        soundPlayer.PlayOneShot(RpgSound);
                     }
                 }
                 else
@@ -81,6 +86,7 @@ public class Enemy : MonoBehaviour
                         Invoke("ShootReset", 0.4f);
                         var go = Instantiate(Bullet) as GameObject;
                         go.transform.position = new Vector3(this.gameObject.transform.position.x - 2.3f, -2.98f, 0);
+                        soundPlayer.PlayOneShot(BulletSound);
                     }
                 }
             }

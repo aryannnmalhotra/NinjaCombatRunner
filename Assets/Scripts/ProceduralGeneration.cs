@@ -52,7 +52,7 @@ public class ProceduralGeneration : MonoBehaviour
            MainCamera.transform.position = MainCamera.transform.position + new Vector3(5.5f * Time.deltaTime, 0.0f, 0.0f);
         for (int i= 0; i < bg.Count; i++)
         {
-            if (NinjaPos.position.x - bg[i].transform.position.x > 11.5f)
+            if (NinjaPos.position.x - bg[i].transform.position.x > 20)
             {
                 var toDestroy = bg[i];
                 bg.RemoveAt(i);
@@ -61,7 +61,7 @@ public class ProceduralGeneration : MonoBehaviour
         }
         for (int i = 0; i < chain.Count; i++)
         {
-            if (NinjaPos.position.x - chain[i].transform.position.x > 4)
+            if (NinjaPos.position.x - chain[i].transform.position.x > 18)
             {
                 var toDestroy = chain[i];
                 chain.RemoveAt(i);

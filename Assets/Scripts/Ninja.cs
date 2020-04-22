@@ -5,11 +5,18 @@ using UnityEngine;
 public class Ninja : MonoBehaviour
 {
     private Animator anim;
+    private AudioSource soundPlayer;
     private bool isSlide;
     private bool isThrow;
+    private bool isTouching;
+    private bool toCheckTouch;
+    private float touchStart;
+    private float touchEnd;
+    private Touch touch;
     public GameObject Star;
     public GameObject Kunai;
     public static float Health;
+    public static float HealthLastChecked;
     public static int StarCount;
     public static int KunaiCount;
     public static bool IsJump;
@@ -17,16 +24,23 @@ public class Ninja : MonoBehaviour
     public float Force;
     public Rigidbody2D Ninjaa;
     public UIManager UI;
+    public AudioClip StarSound;
+    public AudioClip KunaiSound;
+    public AudioClip Hurt;
     private void Awake()
     {
         isSlide = false;
         isThrow = false;
+        isTouching = false;
+        toCheckTouch = false;
         IsJump = false;
         Health = 100;
+        HealthLastChecked = Health;
         StarCount = 30;
         KunaiCount = 20;
         IsAlive = true;
         anim = GetComponent<Animator>();
+        soundPlayer = GetComponent<AudioSource>();
         UI.HealthBar();
     }
     void Start()
@@ -54,6 +68,7 @@ public class Ninja : MonoBehaviour
         Invoke("ThrowReset", 0.15f);
         var go = Instantiate(Kunai) as GameObject;
         go.transform.position = new Vector3(Ninjaa.transform.position.x + 2.5f, Ninjaa.transform.position.y + 0.2f, 0);
+        soundPlayer.PlayOneShot(KunaiSound);
         KunaiCount = Mathf.Clamp(KunaiCount - 1, 0, 20);
         isThrow = false;
     }
@@ -62,6 +77,7 @@ public class Ninja : MonoBehaviour
         Invoke("ThrowReset", 0.15f);
         var go = Instantiate(Star) as GameObject;
         go.transform.position = new Vector3(Ninjaa.transform.position.x + 1.8f, Ninjaa.transform.position.y + 0.1f, 0);
+        soundPlayer.PlayOneShot(StarSound);
         StarCount = Mathf.Clamp(StarCount - 1, 0, 30);
         isThrow = false;
     }
@@ -74,12 +90,37 @@ public class Ninja : MonoBehaviour
         anim.SetBool("Slide", false);
         isSlide = false;
     }
+    public void TStar()
+    {
+        if (StarCount > 0 && !isThrow) 
+        {
+            isThrow = true;
+            CancelInvoke("ThrowReset");
+            anim.SetBool("Throw", true);
+            Invoke("ThrowStar", 0.3f); 
+        }
+    }
+    public void TKunai()
+    {
+        if (KunaiCount > 0 && !isThrow)
+        {
+            isThrow = true;
+            CancelInvoke("ThrowReset");
+            anim.SetBool("Throw", true);
+            Invoke("ThrowKunai", 0.3f);
+        }
+    }
     void Update()
     {
         if (IsAlive)
         {
+            if(HealthLastChecked > Health)
+            {
+                soundPlayer.PlayOneShot(Hurt);
+                HealthLastChecked = Health;
+            }
             Ninjaa.transform.position = Ninjaa.transform.position + new Vector3(5.5f * Time.deltaTime, 0.0f, 0.0f);
-            if (Input.GetKeyDown(KeyCode.W)&&!IsJump&&!isSlide)
+            /*if (Input.GetKeyDown(KeyCode.W)&&!IsJump&&!isSlide)
             {
                 CancelInvoke("JumpReset");
                 IsJump = true;
@@ -92,27 +133,76 @@ public class Ninja : MonoBehaviour
                 isSlide = true;
                 anim.SetBool("Slide", true);
                 Invoke("SlideReset", 1);
-            }
-            if (Input.GetKeyDown(KeyCode.J)&&StarCount>0&&!isThrow)
-            {
-                isThrow = true;
-                CancelInvoke("ThrowReset");
-                anim.SetBool("Throw",true);
-                Invoke("ThrowStar", 0.3f);
-            }
-            if (Input.GetKeyDown(KeyCode.K) && KunaiCount > 0&&!isThrow)
-            {
-                isThrow = true;
-                CancelInvoke("ThrowReset");
-                anim.SetBool("Throw", true);
-                Invoke("ThrowKunai",0.3f);
-            }
+            }*/
             UI.HealthBar();
             if (Health == 0)
             {
                 anim.SetBool("Die", true);
                 IsAlive = false;
                 Ninjaa.transform.position = new Vector3(Ninjaa.transform.position.x, -2.4f, 0);
+            }
+            if (Input.touchCount == 1)
+            {
+                touch = Input.GetTouch(0);
+                if (touch.phase == TouchPhase.Began)
+                {
+                    touchStart = touch.position.y;
+                    touchEnd = touch.position.y;
+                }
+                else if (touch.phase == TouchPhase.Moved)
+                {
+                    touchEnd = touch.position.y;
+                    if (Mathf.Abs(touchStart - touchEnd) >= 50)
+                    {
+                        if (touchStart > touchEnd)
+                        {
+                            if (!IsJump && !isSlide)
+                            {
+                                isSlide = true;
+                                anim.SetBool("Slide", true);
+                                Invoke("SlideReset", 1);
+                            }
+                        }
+                        else if (touchStart < touchEnd)
+                        {
+                            if (!IsJump && !isSlide)
+                            {
+                                CancelInvoke("JumpReset");
+                                IsJump = true;
+                                anim.SetBool("Jump", true);
+                                Ninjaa.AddForce(new Vector2(0, Force * 10));
+                                Invoke("JumpReset", .5f);
+                            }
+                        }
+                    }
+                }
+                else if (touch.phase == TouchPhase.Ended)
+                {
+                    touchEnd = touch.position.y;
+                    if (Mathf.Abs(touchStart - touchEnd) >= 50)
+                    {
+                        if (touchStart > touchEnd)
+                        {
+                            if (!IsJump && !isSlide)
+                            {
+                                isSlide = true;
+                                anim.SetBool("Slide", true);
+                                Invoke("SlideReset", 1);
+                            }
+                        }
+                        else if (touchStart < touchEnd)
+                        {
+                            if (!IsJump && !isSlide)
+                            {
+                                CancelInvoke("JumpReset");
+                                IsJump = true;
+                                anim.SetBool("Jump", true);
+                                Ninjaa.AddForce(new Vector2(0, Force * 10));
+                                Invoke("JumpReset", .5f);
+                            }
+                        }
+                    }
+                }
             }
         }
     }
