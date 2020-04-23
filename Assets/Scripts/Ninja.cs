@@ -120,7 +120,7 @@ public class Ninja : MonoBehaviour
                 HealthLastChecked = Health;
             }
             Ninjaa.transform.position = Ninjaa.transform.position + new Vector3(5.5f * Time.deltaTime, 0.0f, 0.0f);
-            /*if (Input.GetKeyDown(KeyCode.W)&&!IsJump&&!isSlide)
+            if (Input.GetKeyDown(KeyCode.W)&&!IsJump&&!isSlide)
             {
                 CancelInvoke("JumpReset");
                 IsJump = true;
@@ -133,7 +133,7 @@ public class Ninja : MonoBehaviour
                 isSlide = true;
                 anim.SetBool("Slide", true);
                 Invoke("SlideReset", 1);
-            }*/
+            }
             UI.HealthBar();
             if (Health == 0)
             {
