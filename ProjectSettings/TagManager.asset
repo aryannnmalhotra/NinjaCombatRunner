@@ -15,6 +15,7 @@ TagManager:
   - UserManual4
   - UserManual5
   - UserManual6
+  - Replenishable
   layers:
   - Default
   - TransparentFX

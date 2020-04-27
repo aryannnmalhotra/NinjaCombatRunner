@@ -16,6 +16,10 @@ public class MainMenuUI : MonoBehaviour
     public AudioClip ButtonSound;
     void Start()
     {
+        
+    }
+    private void OnEnable()
+    {
         soundPlayer = GetComponent<AudioSource>();
         soundPlayer.PlayOneShot(ButtonSound);
     }

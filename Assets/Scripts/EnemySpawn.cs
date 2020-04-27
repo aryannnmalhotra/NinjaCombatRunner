@@ -12,7 +12,7 @@ public class EnemySpawn : MonoBehaviour
     public static List<GameObject> BetaE = new List<GameObject>();
     private void Awake()
     {
-        currentPoint = 12;
+        currentPoint = 80;
     }
     void Start()
     {

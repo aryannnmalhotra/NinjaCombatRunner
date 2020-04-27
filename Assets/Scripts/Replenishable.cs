@@ -19,11 +19,11 @@ public class Replenishable : MonoBehaviour
                 int toAdd = Random.Range(25,61);
                 Ninja.Health = Mathf.Clamp(Ninja.Health + toAdd, 0, 100);
                 Ninja.HealthLastChecked = Ninja.Health;
-                for(int i = 0; i < ReplenishableSpawn.replenishables.Count; i++)
+                for(int i = 0; i < ReplenishableSpawn.Replenishables.Count; i++)
                 {
-                    if (ReplenishableSpawn.replenishables[i] == this.gameObject)
+                    if (ReplenishableSpawn.Replenishables[i] == this.gameObject)
                     {
-                        ReplenishableSpawn.replenishables.RemoveAt(i);
+                        ReplenishableSpawn.Replenishables.RemoveAt(i);
                         Destroy(this.gameObject);
                     }
                 }
@@ -32,11 +32,11 @@ public class Replenishable : MonoBehaviour
             {
                 int toAdd = Random.Range(5, 11);
                 Ninja.StarCount = Mathf.Clamp(Ninja.StarCount + toAdd, 0, 30);
-                for (int i = 0; i < ReplenishableSpawn.replenishables.Count; i++)
+                for (int i = 0; i < ReplenishableSpawn.Replenishables.Count; i++)
                 {
-                    if (ReplenishableSpawn.replenishables[i] == this.gameObject)
+                    if (ReplenishableSpawn.Replenishables[i] == this.gameObject)
                     {
-                        ReplenishableSpawn.replenishables.RemoveAt(i);
+                        ReplenishableSpawn.Replenishables.RemoveAt(i);
                         Destroy(this.gameObject);
                     }
                 }
@@ -45,11 +45,11 @@ public class Replenishable : MonoBehaviour
             {
                 int toAdd = Random.Range(5, 11);
                 Ninja.KunaiCount = Mathf.Clamp(Ninja.KunaiCount + toAdd, 0, 20);
-                for (int i = 0; i < ReplenishableSpawn.replenishables.Count; i++)
+                for (int i = 0; i < ReplenishableSpawn.Replenishables.Count; i++)
                 {
-                    if (ReplenishableSpawn.replenishables[i] == this.gameObject)
+                    if (ReplenishableSpawn.Replenishables[i] == this.gameObject)
                     {
-                        ReplenishableSpawn.replenishables.RemoveAt(i);
+                        ReplenishableSpawn.Replenishables.RemoveAt(i);
                         Destroy(this.gameObject);
                     }
                 }

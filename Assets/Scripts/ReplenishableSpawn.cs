@@ -9,7 +9,7 @@ public class ReplenishableSpawn : MonoBehaviour
     public GameObject Star;
     public GameObject Kunai;
     public Transform NinjaPos;
-    public static List<GameObject> replenishables = new List<GameObject>();
+    public static List<GameObject> Replenishables = new List<GameObject>();
     private void Awake()
     {
         currentPoint = 14;
@@ -28,21 +28,21 @@ public class ReplenishableSpawn : MonoBehaviour
                 if (decider == 1 || decider == 5 || decider == 6)
                 {
                     var go = Instantiate(Health) as GameObject;
-                    replenishables.Add(go);
+                    Replenishables.Add(go);
                     go.transform.position = new Vector3(currentPoint, 0.5f, 0);
                     currentPoint += Random.Range(7.5f, 9.5f);
                 }
                 else if (decider == 2 || decider == 3)
                 {
                     var go = Instantiate(Kunai) as GameObject;
-                    replenishables.Add(go);
+                    Replenishables.Add(go);
                     go.transform.position = new Vector3(currentPoint, 0.5f, 0);
                     currentPoint += Random.Range(7.5f, 9.5f);
                 }
                 else if (decider == 7 || decider == 4)
                 {
                     var go = Instantiate(Star) as GameObject;
-                    replenishables.Add(go);
+                    Replenishables.Add(go);
                     go.transform.position = new Vector3(currentPoint, 0.5f, 0);
                     currentPoint += Random.Range(7.5f, 9.5f);
                 }
@@ -57,14 +57,14 @@ public class ReplenishableSpawn : MonoBehaviour
     {
         if (Ninja.IsAlive)
         {
-            for (int i = 0; i < replenishables.Count; i++)
+            for (int i = 0; i < Replenishables.Count; i++)
             {
-                if (replenishables[i] != null)
+                if (Replenishables[i] != null)
                 {
-                    if (NinjaPos.position.x - replenishables[i].transform.position.x > 3.5f)
+                    if (NinjaPos.position.x - Replenishables[i].transform.position.x > 3.5f)
                     {
-                        var toDestroy = replenishables[i];
-                        replenishables.RemoveAt(i);
+                        var toDestroy = Replenishables[i];
+                        Replenishables.RemoveAt(i);
                         Destroy(toDestroy);
                     }
                 }

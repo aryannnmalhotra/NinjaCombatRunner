@@ -27,6 +27,7 @@ public class Ninja : MonoBehaviour
     public AudioClip StarSound;
     public AudioClip KunaiSound;
     public AudioClip Hurt;
+    public AudioClip ReplenishableSound;
     private void Awake()
     {
         isSlide = false;
@@ -58,6 +59,8 @@ public class Ninja : MonoBehaviour
             Health = Mathf.Clamp(Health - 100, 0, 100);
         if (collision.gameObject.CompareTag("Scorer"))
             UIManager.Score += 10;
+        if (collision.gameObject.CompareTag("Replenishable"))
+            soundPlayer.PlayOneShot(ReplenishableSound);
     }
     void JumpReset()
     {

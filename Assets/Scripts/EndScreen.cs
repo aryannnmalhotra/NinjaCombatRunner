@@ -15,10 +15,10 @@ public class EndScreen : MonoBehaviour
     }
     void ClearList()
     {
-        for (int i = 0; i < ReplenishableSpawn.replenishables.Count; i++)
+        for (int i = 0; i < ReplenishableSpawn.Replenishables.Count; i++)
         {
-            var toDestroy = ReplenishableSpawn.replenishables[i];
-            ReplenishableSpawn.replenishables.RemoveAt(i);
+            var toDestroy = ReplenishableSpawn.Replenishables[i];
+            ReplenishableSpawn.Replenishables.RemoveAt(i);
             Destroy(toDestroy);
         }
         for (int i = 0; i < ObstacleSpawn.obstacles.Count; i++)
